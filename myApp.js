@@ -118,9 +118,15 @@ var createAndSavePerson = function(done) {
 // 'arrayOfPeople'.
 
 var createManyPeople = function(arrayOfPeople, done) {
+  Person.create(arrayOfPeople, function (err, data) {
 
-    done(null/*, data*/);
-
+    if (err) {
+      done(err);
+    }
+    else {
+      done(null, data);
+    }
+  });
 };
 
 /** # C[R]UD part II - READ #
