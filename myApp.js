@@ -7,12 +7,12 @@
 /*  ================== */
 
 /** 1) Install & Set up mongoose */
-var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URI);
+
 // Add `mongodb` and `mongoose` to the project's `package.json`. Then require
 // `mongoose`. Store your **mLab** database URI in the private `.env` file
 // as `MONGO_URI`. Connect to the database using `mongoose.connect(<Your URI>)`
-
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URI);
 
 /** # SCHEMAS and MODELS #
 /*  ====================== */
@@ -39,7 +39,16 @@ mongoose.connect(process.env.MONGO_URI);
 
 // <Your code here >
 
-var Person /* = <Your Model> */
+var PersonSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  age: Number,
+  favoriteFoods: [ String ]
+});
+
+var Person = mongoose.model('Person', PersonSchema)/* = <Your Model> */
 
 // **Note**: GoMix is a real server, and in real servers interactions with
 // the db are placed in handler functions, to be called when some event happens
