@@ -48,7 +48,7 @@ var PersonSchema = mongoose.Schema({
   favoriteFoods: [ String ]
 });
 
-var Person = mongoose.model('Person', PersonSchema)/* = <Your Model> */
+var Person = mongoose.model('Person', PersonSchema);/* = <Your Model> */
 
 // **Note**: GoMix is a real server, and in real servers interactions with
 // the db are placed in handler functions, to be called when some event happens
@@ -141,9 +141,15 @@ var createManyPeople = function(arrayOfPeople, done) {
 // Use the function argument `personName` as search key.
 
 var findPeopleByName = function(personName, done) {
+  Person.find({name: personName}, function(err, data) {
 
-  done(null/*, data*/);
-
+    if (err) {
+      done(err);
+    }
+    else {
+      done(null, data);
+    }
+  });
 };
 
 /** 6) Use `Model.findOne()` */
