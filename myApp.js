@@ -333,8 +333,15 @@ var removeManyPeople = function(done) {
 
 var queryChain = function(done) {
   var foodToSearch = "burrito";
-
-  done(null/*, data*/);
+  Person.find({favoriteFoods: foodToSearch}).sort({name: "asc"}).limit(2).select("-age").exec(function(err, data) {
+    
+    if (err) {
+      done(err);
+    }
+    else {
+      done(null, data);
+    }
+  });
 };
 
 /** **Well Done !!**
